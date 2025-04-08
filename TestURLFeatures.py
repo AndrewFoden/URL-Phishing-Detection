@@ -57,7 +57,8 @@ def presenceOfHTTPS(URL, label):
 
 def URLshortening(URL, label):
     decision = ""
-    urlshorteningservices = ["tinyurl.com", "rebrand.ly", "ow.ly", "bit.ly"]
+    urlshorteningservices = ["tinyurl.com", "rebrand.ly", "ow.ly", "bit.ly", "shorturl.at", "shorturl.ac", "bl.ink",
+                             "t2m.io", "dub.sh", "short.gy", "short.io", "is.gd", "dweb.link"]
 
     for shorteningservice in urlshorteningservices:
         if shorteningservice in URL:
