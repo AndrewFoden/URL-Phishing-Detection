@@ -23,6 +23,23 @@ def featureURLLength(URL, label):
 
     return decision
 
+def containsAtSymbol(URL, label):
+    decision = ""
+
+    if "@" in URL:
+        if label == "0":
+            decision = "TruePhishing"
+        if label == "1":
+            decision = "FalseBenign"
+    else:
+        if label == "0":
+            decision = "FalsePhishing"
+        if label == "1":
+            decision = "TrueBenign"
+
+    return decision
+
+
 #label 1 = benign
 #label 0 = phishing
 
@@ -33,7 +50,8 @@ def featureURLLength(URL, label):
 with open('URL_train_data.txt', 'r') as URLtraindata:
     for line in URLtraindata:
         url_label = line.strip().rsplit(",", 1)
-        decision = featureURLLength(url_label[0], url_label[1])
+        #decision = featureURLLength(url_label[0], url_label[1])
+        decision = containsAtSymbol(url_label[0], url_label[1])
         if decision == "TruePhishing":
             TP += 1
         elif decision == "FalsePhishing":
