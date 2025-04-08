@@ -10,7 +10,7 @@ FB = 0 #FalseBenign = Labelled as benign, is phishing
 def featureURLLength(URL, label):
     #print(URL)
     decision = ""
-    if len(URL) > 30:
+    if len(URL) >= 40:
         if label == "0":
             decision = "TruePhishing"
         if label == "1":
@@ -32,9 +32,8 @@ def featureURLLength(URL, label):
 #phishingURLtrain = open('OnlyURL_phishing_train_data.txt', 'r')
 with open('URL_train_data.txt', 'r') as URLtraindata:
     for line in URLtraindata:
-        url_label = line.strip().split(",")
+        url_label = line.strip().rsplit(",", 1)
         decision = featureURLLength(url_label[0], url_label[1])
-
         if decision == "TruePhishing":
             TP += 1
         elif decision == "FalsePhishing":
@@ -43,7 +42,8 @@ with open('URL_train_data.txt', 'r') as URLtraindata:
             TB += 1
         elif decision == "FalseBenign":
             FB += 1
-
+        else:
+            print("Not Work: " + str(url_label))
 
 print("TruePhishing: " + str(TP))
 print("FalsePhishing: " + str(FP))
