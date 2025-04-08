@@ -60,19 +60,16 @@ def URLshortening(URL, label):
     urlshorteningservices = ["tinyurl.com", "rebrand.ly", "ow.ly", "bit.ly"]
 
     for shorteningservice in urlshorteningservices:
-
         if shorteningservice in URL:
-            #print(shorteningservice)
             if label == "0":
                 decision = "TruePhishing"
-                print(t)
             if label == "1":
                 decision = "FalseBenign"
-        else:
-            if label == "0":
-                decision = "FalsePhishing"
-            if label == "1":
-                decision = "TrueBenign"
+    if decision == "":
+        if label == "0":
+            decision = "FalsePhishing"
+        if label == "1":
+            decision = "TrueBenign"
 
     return decision
 
