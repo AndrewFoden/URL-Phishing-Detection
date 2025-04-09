@@ -74,6 +74,21 @@ def URLshortening(URL, label):
 
     return decision
 
+def containWWW(URL, label):
+    decision = ""
+
+    if "www." in URL:
+        if label == "1":
+            decision = "TrueBenign"
+        if label == "0":
+            decision = "FalsePhishing"
+    else:
+        if label == "0":
+            decision = "TruePhishing"
+        if label == "1":
+            decision = "FalseBenign"
+
+    return decision
 
 #label 1 = benign
 #label 0 = phishing
@@ -89,8 +104,8 @@ with open('URL_train_data.txt', 'r') as URLtraindata:
         #decision = featureURLLength(url_label[0], url_label[1])
         #decision = containsAtSymbol(url_label[0], url_label[1])
         #decision = presenceOfHTTPS(url_label[0], url_label[1])
-        decision = URLshortening(url_label[0], url_label[1])
-
+        #decision = URLshortening(url_label[0], url_label[1])
+        decision = containWWW(url_label[0], url_label[1])
         if decision == "TruePhishing":
             TP += 1
         elif decision == "FalsePhishing":
