@@ -7,6 +7,12 @@ TB = 0 #TrueBenign = Labelled as benign, is benign. Detected correctly
 FB = 0 #FalseBenign = Labelled as benign, is phishing. Not Detected correctly
 
 
+def getDomain(url):
+    removedprotocolURL = url.replace("https://", "").replace("http://","")
+    domain = removedprotocolURL.split("/")[0]
+    return domain
+
+
 def featureURLLength(URL, label):
     #print(URL)
     decision = ""
@@ -90,6 +96,8 @@ def containWWW(URL, label):
 
     return decision
 
+
+
 #label 1 = benign
 #label 0 = phishing
 
@@ -106,6 +114,8 @@ with open('URL_train_data.txt', 'r') as URLtraindata:
         #decision = presenceOfHTTPS(url_label[0], url_label[1])
         #decision = URLshortening(url_label[0], url_label[1])
         decision = containWWW(url_label[0], url_label[1])
+
+
         if decision == "TruePhishing":
             TP += 1
         elif decision == "FalsePhishing":
