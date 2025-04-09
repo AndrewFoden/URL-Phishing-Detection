@@ -96,7 +96,21 @@ def containWWW(URL, label):
 
     return decision
 
+def domainLength(domain, label):
+    decision = ""
 
+    if len(domain) <= 33:
+        if label == "1":
+            decision = "TrueBenign"
+        if label == "0":
+            decision = "FalsePhishing"
+    else:
+        if label == "1":
+            decision = "FalseBenign"
+        if label == "0":
+            decision = "TruePhishing"
+
+    return decision
 
 #label 1 = benign
 #label 0 = phishing
@@ -113,8 +127,8 @@ with open('URL_train_data.txt', 'r') as URLtraindata:
         #decision = containsAtSymbol(url_label[0], url_label[1])
         #decision = presenceOfHTTPS(url_label[0], url_label[1])
         #decision = URLshortening(url_label[0], url_label[1])
-        decision = containWWW(url_label[0], url_label[1])
-
+        #decision = containWWW(url_label[0], url_label[1])
+        decision = domainLength(getDomain(url_label[0]), url_label[1])
 
         if decision == "TruePhishing":
             TP += 1
