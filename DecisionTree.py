@@ -18,4 +18,4 @@ class DecisionTree:
 
     def runUserInput(self, url):
         for feature in self.features:
-            pass
+            result = feature(url)
