@@ -13,7 +13,7 @@ class FeatureExtraction:
         domain = removedprotocolURL.split("/")[0]
         return domain
 
-    def URLLength(URL, label):
+    def URLLength(self, URL, label):
         # print(URL)
         decision = ""
         if len(URL) >= 40:
@@ -29,7 +29,7 @@ class FeatureExtraction:
 
         return decision
 
-    def containsAtSymbol(URL, label):
+    def containsAtSymbol(self, URL, label):
         decision = ""
 
         if "@" in URL:
@@ -45,7 +45,7 @@ class FeatureExtraction:
 
         return decision
 
-    def containsPresenceOfHTTPS(URL, label):
+    def containsPresenceOfHTTPS(self, URL, label):
         decision = ""
 
         if "https" in URL:
@@ -61,7 +61,7 @@ class FeatureExtraction:
 
         return decision
 
-    def containsURLshortening(URL, label):
+    def containsURLshortening(self, URL, label):
         decision = ""
         urlshorteningservices = ["tinyurl.com", "rebrand.ly", "ow.ly", "bit.ly", "shorturl.at", "shorturl.ac", "bl.ink",
                                  "t2m.io", "dub.sh", "short.gy", "short.io", "is.gd", "dweb.link"]
@@ -80,7 +80,7 @@ class FeatureExtraction:
 
         return decision
 
-    def containsWWW(URL, label):
+    def containsWWW(self, URL, label):
         decision = ""
 
         if "www." in URL:
@@ -96,7 +96,7 @@ class FeatureExtraction:
 
         return decision
 
-    def domainLength(domain, label):
+    def domainLength(self, domain, label):
         decision = ""
 
         if len(domain) <= 33:
@@ -112,7 +112,7 @@ class FeatureExtraction:
 
         return decision
 
-    def suffixInDomain(domain, label):
+    def suffixInDomain(self, domain, label):
         decision = ""
 
         if "-" in domain:
@@ -128,7 +128,7 @@ class FeatureExtraction:
 
         return decision
 
-    def GiniIndex(TP, FP, TB, FB):
+    def GiniIndex(self, TP, FP, TB, FB):
 
         left_node = TP + FB
         print(TP)
