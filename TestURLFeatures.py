@@ -112,6 +112,48 @@ def domainLength(domain, label):
 
     return decision
 
+def suffixInDomain(domain, label):
+    decision = ""
+
+    if "-" in domain:
+        if label == "0":
+            decision = "TruePhishing"
+        if label == "1":
+            decision = "FalseBenign"
+    else:
+        if label == "1":
+            decision = "TrueBenign"
+        if label == "0":
+            decision = "FalsePhishing"
+
+    return decision
+
+def GiniIndex(TP, FP, TB, FB):
+
+    left_node = TP + FB
+    print(TP)
+    print(left_node)
+    p0 = (TP / left_node) ** 2
+    p1 = (FB / left_node) ** 2
+    print(p0)
+    print(p1)
+    left_node_gini = 1 - (p0 + p1)
+
+    right_node = TB + FP
+    p2 = (TB / right_node) ** 2
+    p3 = (FP / right_node) ** 2
+
+    right_node_gini = 1 - (p2 + p3)
+
+    total_dataset = TP + FP + TB + FB
+    left = (left_node * left_node_gini) / total_dataset
+    right = (right_node * right_node_gini) / total_dataset
+    weighted_gini = left + right
+
+    return left_node_gini, right_node_gini
+
+
+
 #label 1 = benign
 #label 0 = phishing
 
@@ -123,12 +165,13 @@ with open('URL_train_data.txt', 'r') as URLtraindata:
     for line in URLtraindata:
         url_label = line.strip().rsplit(",", 1)
 
-        #decision = featureURLLength(url_label[0], url_label[1])
+        decision = featureURLLength(url_label[0], url_label[1])
         #decision = containsAtSymbol(url_label[0], url_label[1])
         #decision = presenceOfHTTPS(url_label[0], url_label[1])
         #decision = URLshortening(url_label[0], url_label[1])
         #decision = containWWW(url_label[0], url_label[1])
-        decision = domainLength(getDomain(url_label[0]), url_label[1])
+        #decision = domainLength(getDomain(url_label[0]), url_label[1])
+        #decision = suffixInDomain(getDomain(url_label[0]), url_label[1])
 
         if decision == "TruePhishing":
             TP += 1
@@ -141,7 +184,13 @@ with open('URL_train_data.txt', 'r') as URLtraindata:
         else:
             print("Not Work: " + str(url_label))
 
+
+    left_node_gini, right_node_gini = GiniIndex(TP, FP, TB, FB)
+
+
 print("TruePhishing: " + str(TP))
 print("FalsePhishing: " + str(FP))
 print("TrueBenign: " + str(TB))
 print("FalseBenign: " + str(FB))
+print("Left Gini: " + str(left_node_gini))
+print("Right Gini: " + str(right_node_gini))
