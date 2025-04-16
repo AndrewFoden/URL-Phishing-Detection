@@ -5,19 +5,29 @@ from FeatureExtraction import FeatureExtraction
 class Main:
 
     def __init__(self):
-        url_label = self.openDataSet()
-        self.callModel(url_label)
+        self.Training()
+
+    def Training(self):
+        url_labels = self.openDataSet()
+        self.callModel(url_labels)
+
+
 
     def openDataSet(self):
+        dataset = []
         with open('URL_train_data.txt', 'r') as URLtraindata:
             for line in URLtraindata:
                 url_label = line.strip().rsplit(",", 1)
-                return url_label
 
-    def callModel(self, url_label):
+                dataset.append(url_label)
+        return dataset
+
+    def callModel(self, url_labels):
         extractor = FeatureExtraction()
         model = DecisionTree(extractor)
-        model.run(url_label[0], url_label[1])
+
+        for url_label in url_labels:
+            model.runTraining(url_label[0], url_label[1])
 
 
 main = Main()
