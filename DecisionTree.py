@@ -1,10 +1,21 @@
 
 class DecisionTree:
 
-    def __int__(self, feature_extractor):
-        print("Decision")
-        self.feature_extractor = feature_extractor
+    def __init__(self, extractor):
+        self.extractor = extractor
 
-    def run(self, url, label):
-        print("running")
+        self.features = [self.extractor.containsWWW,
+                         self.extractor.containsHTTPS,
+                         self.extractor.containsAtSymbol]
 
+
+
+    def runTraining(self, url, label):
+        for feature in self.features:
+            result = feature(url, label)
+            print(feature)
+            #print("result" + str(result))
+
+    def runUserInput(self, url):
+        for feature in self.features:
+            pass
