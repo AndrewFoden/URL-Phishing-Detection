@@ -13,7 +13,7 @@ class FeatureExtraction:
         domain = removedprotocolURL.split("/")[0]
         return domain
 
-    def featureURLLength(URL, label):
+    def URLLength(URL, label):
         # print(URL)
         decision = ""
         if len(URL) >= 40:
@@ -45,7 +45,7 @@ class FeatureExtraction:
 
         return decision
 
-    def presenceOfHTTPS(URL, label):
+    def containsPresenceOfHTTPS(URL, label):
         decision = ""
 
         if "https" in URL:
@@ -61,7 +61,7 @@ class FeatureExtraction:
 
         return decision
 
-    def URLshortening(URL, label):
+    def containsURLshortening(URL, label):
         decision = ""
         urlshorteningservices = ["tinyurl.com", "rebrand.ly", "ow.ly", "bit.ly", "shorturl.at", "shorturl.ac", "bl.ink",
                                  "t2m.io", "dub.sh", "short.gy", "short.io", "is.gd", "dweb.link"]
@@ -80,7 +80,7 @@ class FeatureExtraction:
 
         return decision
 
-    def containWWW(URL, label):
+    def containsWWW(URL, label):
         decision = ""
 
         if "www." in URL:
