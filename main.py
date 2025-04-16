@@ -1,3 +1,4 @@
+from ApplicationFeatureExtraction import ApplicationFeatureExtraction
 from DecisionTree import DecisionTree
 from FeatureExtraction import FeatureExtraction
 
@@ -5,7 +6,8 @@ from FeatureExtraction import FeatureExtraction
 class Main:
 
     def __init__(self):
-        self.Training()
+        #self.Training()
+        self.Application
 
     def Training(self):
         url_labels = self.openDataSet()
@@ -28,6 +30,10 @@ class Main:
 
         for url_label in url_labels:
             model.runTraining(url_label[0], url_label[1])
+
+    def Application(self, url):
+        extractor = ApplicationFeatureExtraction()
+        model = DecisionTree(extractor)
 
 
 main = Main()
