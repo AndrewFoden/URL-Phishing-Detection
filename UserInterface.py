@@ -11,8 +11,6 @@ class UserInterface:
         root.geometry("700x500")
         root.configure(bg="lightgrey")
 
-
-
         title = tk.Label(root, text="URL Phishing Detector", font=("Arial",30))
         title.place(x=150,y=40)
 
@@ -25,7 +23,7 @@ class UserInterface:
         self.entry_box = tk.Entry(root, width=40)
         self.entry_box.place(x=310,y=250)
 
-        entry_button = tk.Button(root, text="Enter", font=("Arial", 14), command=self.getInput())
+        entry_button = tk.Button(root, text="Enter", font=("Arial", 14), command=self.getInput)
         entry_button.place(x=300,y=320)
 
 
@@ -33,7 +31,14 @@ class UserInterface:
 
     def getInput(self):
         input = self.entry_box.get()
+        print("button")
         print(input)
+
+    def phishingURL(self):
+        pass
+
+    def beningURL(self):
+        pass
 
 
 main = UserInterface()
