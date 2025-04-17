@@ -2,8 +2,11 @@ import tkinter as tk
 
 class UserInterface:
 
-    def __init__(self):
-        self.LoadWindow()
+    def __init__(self, callback):
+        self.callback = callback
+        self.entry_box = None
+        #self.LoadWindow()
+
 
     def LoadWindow(self):
         root = tk.Tk()
@@ -31,8 +34,11 @@ class UserInterface:
 
     def getInput(self):
         input = self.entry_box.get()
-        print("button")
-        print(input)
+        #print("button")
+        #print(input)
+        if input:
+            print("True")
+            self.callback(input)
 
     def phishingURL(self):
         pass
@@ -41,4 +47,4 @@ class UserInterface:
         pass
 
 
-main = UserInterface()
+#ui = UserInterface()

@@ -1,13 +1,16 @@
 from ApplicationFeatureExtraction import ApplicationFeatureExtraction
 from DecisionTree import DecisionTree
 from FeatureExtraction import FeatureExtraction
+from UserInterface import UserInterface
 
 
 class Main:
 
     def __init__(self):
         #self.Training()
-        self.Application
+        print("init")
+        self.url_input = None
+        self.Application()
 
     def Training(self):
         url_labels = self.openDataSet()
@@ -31,9 +34,17 @@ class Main:
         for url_label in url_labels:
             model.runTraining(url_label[0], url_label[1])
 
-    def Application(self, url):
+    def Application(self):
+        interface = UserInterface(self.urlInput)
+
+        interface.LoadWindow()
+
+
+    def urlInput(self, urlinput):
         extractor = ApplicationFeatureExtraction()
         model = DecisionTree(extractor)
 
+        self.url_input = urlinput
+        print(urlinput)
 
 main = Main()
