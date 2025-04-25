@@ -2,13 +2,16 @@ import tkinter as tk
 
 class UserInterface:
 
-    def __init__(self, callback):
-        self.callback = callback
-        self.entry_box = None
-        #self.LoadWindow()
+    def __init__(self, input_callback):
+        self.url_input_callback = input_callback
+        print("UI INIT")
+        self.LoadWindow()
+        print("return")
+
 
 
     def LoadWindow(self):
+        print("LoadWindow")
         root = tk.Tk()
         root.title("URL Phishing Detector")
         root.geometry("700x500")
@@ -33,12 +36,14 @@ class UserInterface:
         root.mainloop()
 
     def getInput(self):
-        input = self.entry_box.get()
+        print("getInput")
+        url = self.entry_box.get()
+        if url:
+            self.url_input_callback(url)
         #print("button")
         #print(input)
-        if input:
-            print("True")
-            self.callback(input)
+
+
 
     def phishingURL(self):
         pass
