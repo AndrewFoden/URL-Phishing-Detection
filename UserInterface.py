@@ -32,6 +32,8 @@ class UserInterface:
         entry_button = tk.Button(root, text="Enter", font=("Arial", 14), command=self.getInput)
         entry_button.place(x=300,y=320)
 
+        self.result = tk.Label(root, text="", font=("Arial", 14), fg="blue", bg="lightgrey")
+        self.result.place(x=260, y=380)
 
         root.mainloop()
 
@@ -39,7 +41,8 @@ class UserInterface:
         print("getInput")
         url = self.entry_box.get()
         if url:
-            self.url_input_callback(url)
+            decision = self.url_input_callback(url)
+            self.result.config(text="Predicted: " + decision)
         #print("button")
         #print(input)
 
