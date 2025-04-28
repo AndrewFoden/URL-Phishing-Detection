@@ -13,7 +13,7 @@ def getDomain(url):
     return domain
 
 
-def featureURLLength(URL, label):
+def URLLength(URL, label):
     #print(URL)
     decision = ""
     if len(URL) >= 40:
@@ -45,7 +45,7 @@ def containsAtSymbol(URL, label):
 
     return decision
 
-def presenceOfHTTPS(URL, label):
+def containsHTTPS(URL, label):
     decision = ""
 
     if "https" in URL:
@@ -80,7 +80,7 @@ def URLshortening(URL, label):
 
     return decision
 
-def containWWW(URL, label):
+def containsWWW(URL, label):
     decision = ""
 
     if "www." in URL:
@@ -131,12 +131,12 @@ def suffixInDomain(domain, label):
 def GiniIndex(TP, FP, TB, FB):
 
     left_node = TP + FB
-    print(TP)
-    print(left_node)
+    #print(TP)
+    #print(left_node)
     p0 = (TP / left_node) ** 2
     p1 = (FB / left_node) ** 2
-    print(p0)
-    print(p1)
+    #print(p0)
+    #print(p1)
     left_node_gini = 1 - (p0 + p1)
 
     right_node = TB + FP
@@ -146,11 +146,11 @@ def GiniIndex(TP, FP, TB, FB):
     right_node_gini = 1 - (p2 + p3)
 
     total_dataset = TP + FP + TB + FB
-    left = (left_node * left_node_gini) / total_dataset
-    right = (right_node * right_node_gini) / total_dataset
-    weighted_gini = left + right
+    left_phishing = (left_node * left_node_gini) / total_dataset
+    right_benign = (right_node * right_node_gini) / total_dataset
+    weighted_gini = left_phishing + right_benign
 
-    return left_node_gini, right_node_gini
+    return left_node_gini, right_node_gini, weighted_gini
 
 
 
@@ -159,17 +159,17 @@ def GiniIndex(TP, FP, TB, FB):
 
 
 
-#benignURLtrain = open('benign_train_data.txt', 'r')
-#phishingURLtrain = open('OnlyURL_phishing_train_data.txt', 'r')
+    #benignURLtrain = open('benign_train_data.txt', 'r')
+    #phishingURLtrain = open('OnlyURL_phishing_train_data.txt', 'r')
 with open('URL_train_data.txt', 'r') as URLtraindata:
     for line in URLtraindata:
         url_label = line.strip().rsplit(",", 1)
 
-        decision = featureURLLength(url_label[0], url_label[1])
+        #decision = URLLength(url_label[0], url_label[1])
         #decision = containsAtSymbol(url_label[0], url_label[1])
-        #decision = presenceOfHTTPS(url_label[0], url_label[1])
+        #decision = containsHTTPS(url_label[0], url_label[1])
         #decision = URLshortening(url_label[0], url_label[1])
-        #decision = containWWW(url_label[0], url_label[1])
+        decision = containsWWW(url_label[0], url_label[1])
         #decision = domainLength(getDomain(url_label[0]), url_label[1])
         #decision = suffixInDomain(getDomain(url_label[0]), url_label[1])
 
@@ -185,12 +185,18 @@ with open('URL_train_data.txt', 'r') as URLtraindata:
             print("Not Work: " + str(url_label))
 
 
-    left_node_gini, right_node_gini = GiniIndex(TP, FP, TB, FB)
+left_node_gini, right_node_gini, weighted_gini = GiniIndex(TP, FP, TB, FB)
 
-
+print("Feature: Length of URL")
 print("TruePhishing: " + str(TP))
 print("FalsePhishing: " + str(FP))
 print("TrueBenign: " + str(TB))
 print("FalseBenign: " + str(FB))
-print("Left Gini: " + str(left_node_gini))
-print("Right Gini: " + str(right_node_gini))
+print("Left/Phishing Gini: " + str(left_node_gini))
+print("Right/Benign Gini: " + str(right_node_gini))
+print("Weighted Gini: " + str(weighted_gini))
+
+
+
+
+

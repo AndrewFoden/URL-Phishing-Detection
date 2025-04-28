@@ -45,7 +45,7 @@ class FeatureExtraction:
 
         return decision
 
-    def containsPresenceOfHTTPS(self, URL, label):
+    def containsHTTPS(self, URL, label):
         decision = ""
 
         if "https" in URL:
