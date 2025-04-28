@@ -1,21 +1,22 @@
 
 class DecisionTree:
 
-    def __init__(self, extractor):
-        self.extractor = extractor
-
-        self.features = [self.extractor.containsWWW,
-                         self.extractor.containsHTTPS,
-                         self.extractor.containsAtSymbol]
+    def __init__(self):
+        pass
 
 
 
     def runTraining(self, url, label):
         for feature in self.features:
             result = feature(url, label)
-            print(feature)
+
             #print("result" + str(result))
 
-    def runUserInput(self, url):
-        for feature in self.features:
-            result = feature(url)
+    def runUserInput(self, features):
+
+        for feature in features:
+            if feature == "Phishing":
+                return "phishing"
+        return "benign"
+
+
