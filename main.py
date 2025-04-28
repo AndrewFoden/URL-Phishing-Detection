@@ -15,12 +15,6 @@ class Main:
         self.Application() #Runs Application
 
 
-    def Training(self):
-        url_labels = self.openDataSet()
-        self.callModel(url_labels)
-
-
-
     def openDataSet(self):
         dataset = []
         correctNoPrediction = 0
